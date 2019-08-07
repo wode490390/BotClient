@@ -1,0 +1,5 @@
+server-host: "127.0.0.1"
+server-port: 19132
+max-client: 1
+log-level: 1
+session-log: true
