@@ -18,43 +18,40 @@ public class ConsoleCommandManager {
         commandMap = new HashMap<String, ConsoleCommand>(){
             {
                 put("stop", (args) -> {
-                    log.info("The command has been executed successfully: {}", args[0]);
-                    main.shutdown(); //TODO: fix
+                    log.info("Stopping the server...");
+                    main.shutdown();
                 });
                 put("version", (args) -> {
-                    log.info("The command has been executed successfully: {}", args[0]);
                     log.info("wodeFakeClient (MCBE) Version: " + Main.VERSION);
                 });
                 put("add", (args) -> {
                     int count = 1;
-                    /*if (args.length > 0) {
+                    if (args.length > 0) {
                         try {
                             count = Integer.parseInt(args[1]);
                         } catch (Exception e) {
-                            log.info("Unexpected parameter: {}", args[1]);
+                            log.info("Usage: /add [count]");
                         }
-                    }*/
+                    }
                     for (int i = 0; i < count; ++i) {
                         main.getClientManager().newClient();
                     }
-                    log.info("The command has been executed successfully: {}", args[0]);
                 });
                 put("close", (args) -> {
                     int count = 1;
-                    /*if (args.length > 0) {
+                    if (args.length > 0) {
                         try {
                             count = Integer.parseInt(args[1]);
                         } catch (Exception e) {
-                            log.info("Unexpected parameter: {}", args[1]);
+                            log.info("Usage: /close [count]");
                         }
-                    }*/
+                    }
                     Iterator<BedrockClient> iterator = main.getClientManager().getClients().iterator();
                     for (int i = 0; i < count; ++i) {
                         BedrockClient client = iterator.next();
                         client.close();
                         main.getClientManager().getClients().remove(client);
                     }
-                    log.info("The command has been executed successfully: {}", args[0]);
                 });
             }
         };
@@ -64,9 +61,13 @@ public class ConsoleCommandManager {
         String[] commandLine = command.split(" ");
         ConsoleCommand cmd = getCommandMap().get(commandLine[0]);
         if (cmd != null) {
-            cmd.dispatch(commandLine);
+            try {
+                cmd.dispatch(commandLine);
+            } catch (Exception e) {
+                log.error("An unknown error occurred while attempting to perform this command: " + cmd, e);
+            }
         } else {
-            log.info("Unknown command: " + cmd);
+            log.info("Unknown command");
         }
     }
 

@@ -117,7 +117,7 @@ public class Main {
             if (TITLE) {
                 System.out.print((char) 0x1b + "]0;Client is starting up..." + (char) 0x07);
             }
-            instance = new Main();
+            new Main();
         } catch (Throwable t) {
             log.throwing(t);
         }
@@ -130,6 +130,8 @@ public class Main {
     }
 
     private Main() throws IOException {
+        instance = this;
+
         console = new ClientConsole(this);
         consoleThread = new Thread() {
             @Override
@@ -212,7 +214,7 @@ public class Main {
     }
 
     public void shutdown() {
-        if (running.compareAndSet(false, true)) {
+        if (running.compareAndSet(true, false)) {
             synchronized (this) {
                 notify();
             }
