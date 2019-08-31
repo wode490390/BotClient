@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>cn.wode490390.mcbe</groupId>
     <artifactId>botclient</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <name>BotClient</name>
     <description>Bot client for Minecraft: Bedrock Edition</description>
     <inceptionYear>2018</inceptionYear>
@@ -37,8 +37,8 @@
     <dependencies>
         <dependency>
             <groupId>com.nukkitx.protocol</groupId>
-            <artifactId>bedrock-v354</artifactId>
-            <version>2.0.2</version>
+            <artifactId>bedrock-v361</artifactId>
+            <version>2.1.2</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

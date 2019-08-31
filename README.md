@@ -7,6 +7,8 @@ Create your Minecraft: Bedrock Edition bots.
 
 ### This project is still a work in progress and probably won't be complete any time soon.
 
+Known supported server softwares: [**NukkitX 1.0**](https://github.com/NukkitX/Nukkit)
+
 ## Compiling
 Run `mvn clean package`. The compiled JAR can be found in the `target/` directory.
 

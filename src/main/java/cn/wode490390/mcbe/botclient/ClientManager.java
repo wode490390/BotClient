@@ -35,6 +35,7 @@ public class ClientManager {
                 session.setPacketHandler(new ClientPacketHandler(session, client, this));
 
                 session.sendPacketImmediately(ClientPacketFactory.randomLoginPacket());
+                session.sendPacket(ClientPacketFactory.getClientCacheStatusPacket());
                 session.sendPacket(ClientPacketFactory.getResourcePackClientResponsePacket4());
                 session.sendPacket(ClientPacketFactory.getSetLocalPlayerAsInitializedPacket());
 
