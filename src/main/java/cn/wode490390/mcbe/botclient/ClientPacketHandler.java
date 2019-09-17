@@ -12,6 +12,7 @@ public class ClientPacketHandler implements BedrockPacketHandler {
     private final BedrockClientSession session;
     private final BedrockClient client;
     private final ClientManager manager;
+    private ClientTaskManager tasker;
 
     /*public int x = 0;
     public int y = 0;
@@ -20,6 +21,7 @@ public class ClientPacketHandler implements BedrockPacketHandler {
     public int food = 20;
     public int foods = 20;
     public boolean dead = false;*/
+    public boolean initialized = false;
 
     public ClientPacketHandler(BedrockClientSession session, BedrockClient client, ClientManager manager) {
         this.session = session;
@@ -32,6 +34,29 @@ public class ClientPacketHandler implements BedrockPacketHandler {
         log.debug("Disconnect!!");
         session.disconnect();
         manager.getClients().remove(client);
-        return false;
+        return true;
+    }
+
+    @Override
+    public boolean handle(ResourcePacksInfoPacket packet) {
+        session.sendPacket(ClientPacketFactory.getClientCacheStatusPacket());
+        session.sendPacket(ClientPacketFactory.getResourcePackClientResponsePacket3());
+        return true;
+    }
+
+    @Override
+    public boolean handle(ResourcePackStackPacket packet) {
+        session.sendPacket(ClientPacketFactory.getResourcePackClientResponsePacket4());
+        return true;
+    }
+
+    @Override
+    public boolean handle(PlayStatusPacket packet) {
+        if (packet.getStatus() == PlayStatusPacket.Status.PLAYER_SPAWN && !this.initialized) {
+            this.initialized = true;
+            session.sendPacket(ClientPacketFactory.getSetLocalPlayerAsInitializedPacket());
+            this.tasker = new ClientTaskManager(session);
+        }
+        return true;
     }
 }
