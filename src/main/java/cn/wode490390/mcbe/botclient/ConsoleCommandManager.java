@@ -18,7 +18,7 @@ public class ConsoleCommandManager {
         commandMap = new HashMap<String, ConsoleCommand>(){
             {
                 put("stop", (args) -> {
-                    log.info("Stopping the server...");
+                    log.info("Stopping the client...");
                     main.shutdown();
                 });
                 put("version", (args) -> {

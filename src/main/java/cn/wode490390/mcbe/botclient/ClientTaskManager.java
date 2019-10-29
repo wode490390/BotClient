@@ -27,6 +27,10 @@ public class ClientTaskManager {
         timer.schedule(new RespawnTask(), 40000, 38000);//(5~10)25~30,31~40
     }
 
+    public Timer getTimer() {
+        return timer;
+    }
+
     class RespawnTask extends TimerTask {
 
         RespawnTask() {
