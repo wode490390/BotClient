@@ -8,27 +8,29 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class ClientTaskManager {
 
-    private static final Timer timer = new Timer();
+    private final Timer timer;
 
     private final BedrockClientSession session;
 
     public ClientTaskManager(BedrockClientSession session) {
         this.session = session;
-        timer.schedule(new RequestTask(), 9000, 1000); //9,1
+        this.timer = new Timer(true);
+
+        this.timer.schedule(new RequestTask(), 9000, 1000); //9,1
         //Must be spawned
-        timer.schedule(new ResponseTask(), 10000, 10000); //10,10
-        timer.schedule(new ChatTask(), 10000, 10000); //10,10
-        timer.schedule(new EatTask(), 10000, 10000); //10,10
-        timer.schedule(new AnimateTask(), 10000, 10000); //10,10
-        timer.schedule(new CommandTask(), 10000, 10000); //10,10
-        timer.schedule(new ActionTask(), 10000, 10000); //10,10
-        timer.schedule(new RotateTask(), 10000, 10000); //10,10
+        this.timer.schedule(new ResponseTask(), 10000, 10000); //10,10
+        this.timer.schedule(new ChatTask(), 10000, 10000); //10,10
+        this.timer.schedule(new EatTask(), 10000, 10000); //10,10
+        this.timer.schedule(new AnimateTask(), 10000, 10000); //10,10
+        this.timer.schedule(new CommandTask(), 10000, 10000); //10,10
+        this.timer.schedule(new ActionTask(), 10000, 10000); //10,10
+        this.timer.schedule(new RotateTask(), 10000, 10000); //10,10
         //Must be dead
-        timer.schedule(new RespawnTask(), 40000, 38000);//(5~10)25~30,31~40
+        this.timer.schedule(new RespawnTask(), 40000, 38000);//(5~10)25~30,31~40
     }
 
     public Timer getTimer() {
-        return timer;
+        return this.timer;
     }
 
     class RespawnTask extends TimerTask {

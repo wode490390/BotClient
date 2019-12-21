@@ -16,7 +16,7 @@ import com.nukkitx.protocol.bedrock.BedrockPacketCodec;
 import com.nukkitx.protocol.bedrock.data.CommandOriginData;
 import com.nukkitx.protocol.bedrock.packet.*;
 import com.nukkitx.protocol.bedrock.util.EncryptionUtils;
-import com.nukkitx.protocol.bedrock.v361.Bedrock_v361;
+import com.nukkitx.protocol.bedrock.v388.Bedrock_v388;
 import io.netty.util.AsciiString;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
@@ -33,7 +33,7 @@ import net.minidev.json.JSONObject;
 
 public class ClientPacketFactory {
 
-    public static final BedrockPacketCodec CODEC = Bedrock_v361.V361_CODEC;
+    public static final BedrockPacketCodec CODEC = Bedrock_v388.V388_CODEC;
 
     private static final ThreadLocalRandom rand = ThreadLocalRandom.current();
     private static final ObjectMapper jsonMapper = new ObjectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
@@ -172,6 +172,8 @@ public class ClientPacketFactory {
         skinDataJSON.put("SkinId", UUID.randomUUID().toString() + skinGeometry);
         skinDataJSON.put("SkinData", skinData);
         skinDataJSON.put("CapeData", "");
+        skinDataJSON.put("CapeImageWidth", 0);
+        skinDataJSON.put("CapeImageHeight", 0);
         JWSObject skinData = forgeSkinData(skinDataJSON);
 
         AsciiString chainData;
@@ -367,5 +369,13 @@ public class ClientPacketFactory {
     }
     public static RequestChunkRadiusPacket getRequestChunkRadiusPacket32() {
         return requestChunkRadiusPacket32;
+    }
+
+    private static final RespawnPacket respawnPacket2 = new RespawnPacket();
+    static {
+        respawnPacket2.setSpawnState(RespawnPacket.State.CLIENT_READY);
+    }
+    public static RespawnPacket getRespawnPacket2() {
+        return respawnPacket2;
     }
 }

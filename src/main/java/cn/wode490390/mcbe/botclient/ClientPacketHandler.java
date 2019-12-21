@@ -71,4 +71,12 @@ public class ClientPacketHandler implements BedrockPacketHandler {
         }
         return true;
     }
+
+    @Override
+    public boolean handle(RespawnPacket packet) {
+        if (packet.getSpawnState() == RespawnPacket.State.SERVER_SEARCHING) {
+            session.sendPacket(ClientPacketFactory.getRespawnPacket2());
+        }
+        return true;
+    }
 }

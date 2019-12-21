@@ -7,7 +7,7 @@
     <groupId>cn.wode490390.mcbe</groupId>
     <artifactId>botclient</artifactId>
     <packaging>jar</packaging>
-    <version>1.1.1</version>
+    <version>1.2.0</version>
     <name>BotClient</name>
     <description>Bot client for Minecraft: Bedrock Edition</description>
     <url>http://wode490390.cn/</url>
@@ -49,9 +49,9 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <log4j.version>2.12.1</log4j.version>
-        <jline.version>3.13.1</jline.version>
-        <jackson.version>2.10.0</jackson.version>
+        <log4j.version>2.13.0</log4j.version>
+        <jline.version>3.13.2</jline.version>
+        <jackson.version>2.10.1</jackson.version>
     </properties>
 
     <repositories>
@@ -74,8 +74,8 @@
     <dependencies>
         <dependency>
             <groupId>com.nukkitx.protocol</groupId>
-            <artifactId>bedrock-v361</artifactId>
-            <version>2.3.1</version>
+            <artifactId>bedrock-v388</artifactId>
+            <version>2.4.3</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -88,7 +88,7 @@
             <groupId>com.google.code.findbugs</groupId>
             <artifactId>jsr305</artifactId>
             <version>3.0.2</version>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -227,7 +227,7 @@
             <plugin>
                 <groupId>pl.project13.maven</groupId>
                 <artifactId>git-commit-id-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>4.0.0</version>
                 <executions>
                     <execution>
                         <id>get-the-git-infos</id>
@@ -239,7 +239,7 @@
                 <configuration>
                     <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
                     <prefix>git</prefix>
-                    <dateFormat>dd.MM.yyyy '@' HH:mm:ss z</dateFormat>
+                    <dateFormat>yyyy.MM.dd '@' HH:mm:ss z</dateFormat>
                     <dateFormatTimeZone>${user.timezone}</dateFormatTimeZone>
                     <verbose>true</verbose>
                     <generateGitPropertiesFile>true</generateGitPropertiesFile>
