@@ -1,13 +1,17 @@
 version: 2
+
 jobs:
   build:
     docker:
       - image: circleci/openjdk:8-jdk-stretch
+
     steps:
       - checkout
+
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "pom.xml" }}
+
       - run:
           command: |
             mvn dependency:go-offline
@@ -18,10 +22,6 @@ jobs:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
+
       - store_artifacts:
           path: artifact
-workflows:
-  version: 2
-  build:
-    jobs:
-      - build

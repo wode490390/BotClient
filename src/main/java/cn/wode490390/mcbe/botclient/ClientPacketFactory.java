@@ -16,7 +16,7 @@ import com.nukkitx.protocol.bedrock.BedrockPacketCodec;
 import com.nukkitx.protocol.bedrock.data.CommandOriginData;
 import com.nukkitx.protocol.bedrock.packet.*;
 import com.nukkitx.protocol.bedrock.util.EncryptionUtils;
-import com.nukkitx.protocol.bedrock.v388.Bedrock_v388;
+import com.nukkitx.protocol.bedrock.v389.Bedrock_v389;
 import io.netty.util.AsciiString;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
@@ -33,7 +33,7 @@ import net.minidev.json.JSONObject;
 
 public class ClientPacketFactory {
 
-    public static final BedrockPacketCodec CODEC = Bedrock_v388.V388_CODEC;
+    public static final BedrockPacketCodec CODEC = Bedrock_v389.V389_CODEC;
 
     private static final ThreadLocalRandom rand = ThreadLocalRandom.current();
     private static final ObjectMapper jsonMapper = new ObjectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);

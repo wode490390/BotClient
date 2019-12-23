@@ -165,6 +165,8 @@ public class Main {
                 break;
         }
 
+        log.info("Starting Minecraft: Bedrock Edition client version {} (protocol version {})", ClientPacketFactory.CODEC.getMinecraftVersion(), ClientPacketFactory.CODEC.getProtocolVersion());
+
         commandManager = new ConsoleCommandManager(this);
         clientManager = new ClientManager(this);
 
