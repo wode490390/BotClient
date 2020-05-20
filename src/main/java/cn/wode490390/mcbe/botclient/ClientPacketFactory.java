@@ -14,10 +14,13 @@ import com.nukkitx.math.vector.Vector3f;
 import com.nukkitx.math.vector.Vector3i;
 import com.nukkitx.protocol.bedrock.BedrockPacketCodec;
 import com.nukkitx.protocol.bedrock.data.CommandOriginData;
+import com.nukkitx.protocol.bedrock.data.EntityEventType;
 import com.nukkitx.protocol.bedrock.packet.*;
 import com.nukkitx.protocol.bedrock.util.EncryptionUtils;
-import com.nukkitx.protocol.bedrock.v389.Bedrock_v389;
+import com.nukkitx.protocol.bedrock.v390.Bedrock_v390;
 import io.netty.util.AsciiString;
+import net.minidev.json.JSONObject;
+
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyPair;
@@ -29,11 +32,10 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.annotation.Nullable;
-import net.minidev.json.JSONObject;
 
 public class ClientPacketFactory {
 
-    public static final BedrockPacketCodec CODEC = Bedrock_v389.V389_CODEC;
+    public static final BedrockPacketCodec CODEC = Bedrock_v390.V390_CODEC;
 
     private static final ThreadLocalRandom rand = ThreadLocalRandom.current();
     private static final ObjectMapper jsonMapper = new ObjectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
@@ -135,7 +137,7 @@ public class ClientPacketFactory {
     public static LoginPacket randomLoginPacket() {
         String playerName = "wode" + (rand.nextInt() & 0x7fffffff);
         String svrAddr = "127.0.0.1:19132";
-        String mcVer = "1.11." + rand.nextInt(4);
+        String mcVer = "1.14.60" /*+ rand.nextInt(1)*/;
         String lang = langs.get(rand.nextInt(langs.size() - 1));
         String geometryName = "geometry.humanoid.custom";
         String skinGeometry = "_Custom";
@@ -225,7 +227,7 @@ public class ClientPacketFactory {
 
     private static final EntityEventPacket entityEventPacket57 = new EntityEventPacket();
     static {
-        entityEventPacket57.setEvent(EntityEventPacket.Event.EATING_ITEM);
+        entityEventPacket57.setType(EntityEventType.EATING_ITEM);
         entityEventPacket57.setRuntimeEntityId(0);
     }
     public static EntityEventPacket randomEntityEventPacket57() {
@@ -373,7 +375,7 @@ public class ClientPacketFactory {
 
     private static final RespawnPacket respawnPacket2 = new RespawnPacket();
     static {
-        respawnPacket2.setSpawnState(RespawnPacket.State.CLIENT_READY);
+        respawnPacket2.setState(RespawnPacket.State.CLIENT_READY);
     }
     public static RespawnPacket getRespawnPacket2() {
         return respawnPacket2;

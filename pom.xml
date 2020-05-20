@@ -49,39 +49,29 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <log4j.version>2.13.0</log4j.version>
-        <jline.version>3.13.2</jline.version>
-        <jackson.version>2.10.1</jackson.version>
+        <log4j.version>2.13.3</log4j.version>
+        <jline.version>3.14.1</jline.version>
+        <jackson.version>2.11.0</jackson.version>
     </properties>
 
     <repositories>
         <repository>
             <id>nukkitx-repo</id>
-            <url>http://repo.nukkitx.com/main/</url>
-        </repository>
-        <repository>
-            <id>nukkitx-repo-snapshot</id>
-            <url>http://repo.nukkitx.com/snapshot/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
+            <url>https://repo.nukkitx.com/main/</url>
         </repository>
     </repositories>
 
     <dependencies>
         <dependency>
             <groupId>com.nukkitx.protocol</groupId>
-            <artifactId>bedrock-v389</artifactId>
-            <version>2.4.4</version>
+            <artifactId>bedrock-v390</artifactId>
+            <version>2.5.6</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.10</version>
+            <version>1.18.12</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
