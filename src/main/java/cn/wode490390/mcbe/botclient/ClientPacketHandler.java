@@ -6,6 +6,8 @@ import com.nukkitx.protocol.bedrock.handler.BedrockPacketHandler;
 import com.nukkitx.protocol.bedrock.packet.*;
 import lombok.extern.log4j.Log4j2;
 
+import java.net.InetSocketAddress;
+
 @Log4j2
 public class ClientPacketHandler implements BedrockPacketHandler {
 
@@ -24,10 +26,13 @@ public class ClientPacketHandler implements BedrockPacketHandler {
     public int viewDistance = 32;*/
     public boolean initialized = false;
 
-    public ClientPacketHandler(BedrockClientSession session, BedrockClient client, ClientManager manager) {
+    public LoginPacket loginPacket;
+
+    public ClientPacketHandler(BedrockClientSession session, BedrockClient client, ClientManager manager, LoginPacket loginPacket) {
         this.session = session;
         this.client = client;
         this.manager = manager;
+        this.loginPacket = loginPacket;
     }
 
     public ClientTaskManager getTaskManager() {
@@ -77,6 +82,18 @@ public class ClientPacketHandler implements BedrockPacketHandler {
         if (packet.getState() == RespawnPacket.State.SERVER_SEARCHING) {
             session.sendPacket(ClientPacketFactory.getRespawnPacket2());
         }
+        return true;
+    }
+
+    @Override
+    public boolean handle(TransferPacket packet) {
+        String address =  packet.getAddress();
+        int port = packet.getPort();
+        log.debug("Transfer to {}:{}", address, port);
+        tasker.getTimer().cancel();
+        session.disconnect();
+        manager.getClients().remove(client);
+        manager.newClient(new InetSocketAddress(address, port), this.loginPacket);
         return true;
     }
 }

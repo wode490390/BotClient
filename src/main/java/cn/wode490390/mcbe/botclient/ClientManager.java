@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadLocalRandom;
+
+import com.nukkitx.protocol.bedrock.packet.LoginPacket;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -13,7 +15,7 @@ public class ClientManager {
 
     private final Main main;
 
-    private static final Set<BedrockClient> clients = Collections.newSetFromMap(new ConcurrentHashMap<>());
+    private final Set<BedrockClient> clients = Collections.newSetFromMap(new ConcurrentHashMap<>());
 
     public ClientManager(Main main) {
         this.main = main;
@@ -32,9 +34,36 @@ public class ClientManager {
                     session.setLogging(false);
                 }
                 session.setPacketCodec(ClientPacketFactory.CODEC);
-                session.setPacketHandler(new ClientPacketHandler(session, client, this));
+                LoginPacket loginPacket = ClientPacketFactory.randomLoginPacket();
+                session.setPacketHandler(new ClientPacketHandler(session, client, this, loginPacket));
 
-                session.sendPacketImmediately(ClientPacketFactory.randomLoginPacket());
+                session.sendPacketImmediately(loginPacket);
+                //session.sendPacket(ClientPacketFactory.getClientCacheStatusPacket());
+                //session.sendPacket(ClientPacketFactory.getResourcePackClientResponsePacket4());
+                //session.sendPacket(ClientPacketFactory.getSetLocalPlayerAsInitializedPacket());
+
+                //new ClientTaskManager(session);
+            }
+        });
+        return client;
+    }
+
+    public BedrockClient newClient(InetSocketAddress address, LoginPacket loginPacket) {
+        InetSocketAddress bindAddress = new InetSocketAddress("0.0.0.0", ThreadLocalRandom.current().nextInt(20000, 60000));
+        BedrockClient client = new BedrockClient(bindAddress);
+        clients.add(client);
+        client.bind().join();
+        client.connect(address).whenComplete((session, throwable) -> {
+            if (throwable == null) {
+                if (main.getConfiguration().isEnableSessionLog()) {
+                    log.info("RakNet client started on {}", client.getBindAddress());
+                } else {
+                    session.setLogging(false);
+                }
+                session.setPacketCodec(ClientPacketFactory.CODEC);
+                session.setPacketHandler(new ClientPacketHandler(session, client, this, loginPacket));
+
+                session.sendPacketImmediately(loginPacket);
                 //session.sendPacket(ClientPacketFactory.getClientCacheStatusPacket());
                 //session.sendPacket(ClientPacketFactory.getResourcePackClientResponsePacket4());
                 //session.sendPacket(ClientPacketFactory.getSetLocalPlayerAsInitializedPacket());

@@ -264,10 +264,10 @@ public class ClientPacketFactory {
     }
 
     private static final String[] commands = { //TODO: more
-            "version",
-            "help",
-            "?",
-            "stop",
+            "/version",
+            "/help",
+            "/?",
+//            "/stop",
     };
     private static final CommandOriginData commandOriginData = new CommandOriginData(CommandOriginData.Origin.PLAYER, UUID.randomUUID(), "", 0); //0 //0~10
     private static final CommandRequestPacket commandRequestPacket = new CommandRequestPacket();

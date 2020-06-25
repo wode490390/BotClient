@@ -19,7 +19,7 @@ public class ClientTaskManager {
         this.timer.schedule(new RequestTask(), 9000, 1000); //9,1
         //Must be spawned
         this.timer.schedule(new ResponseTask(), 10000, 10000); //10,10
-        this.timer.schedule(new ChatTask(), 10000, 10000); //10,10
+//        this.timer.schedule(new ChatTask(), 10000, 10000); //10,10
         this.timer.schedule(new EatTask(), 10000, 10000); //10,10
         this.timer.schedule(new AnimateTask(), 10000, 10000); //10,10
         this.timer.schedule(new CommandTask(), 10000, 10000); //10,10
