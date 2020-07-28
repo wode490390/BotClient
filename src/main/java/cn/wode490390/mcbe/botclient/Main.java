@@ -52,9 +52,10 @@ public class Main {
         }
 
         System.setProperty("log4j.skipJansi", "false");
+        System.getProperties().putIfAbsent("io.netty.allocator.type", "unpooled"); // Disable memory pooling unless specified
 
         InternalLoggerFactory.setDefaultFactory(Log4J2LoggerFactory.INSTANCE);
-        ResourceLeakDetector.setLevel(ResourceLeakDetector.Level.PARANOID);
+        ResourceLeakDetector.setLevel(ResourceLeakDetector.Level.DISABLED);
 
         OptionParser parser = new OptionParser();
         parser.allowsUnrecognizedOptions();
