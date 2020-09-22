@@ -13,11 +13,13 @@ import com.nimbusds.jwt.SignedJWT;
 import com.nukkitx.math.vector.Vector3f;
 import com.nukkitx.math.vector.Vector3i;
 import com.nukkitx.protocol.bedrock.BedrockPacketCodec;
-import com.nukkitx.protocol.bedrock.data.CommandOriginData;
-import com.nukkitx.protocol.bedrock.data.EntityEventType;
+import com.nukkitx.protocol.bedrock.data.command.CommandOriginData;
+import com.nukkitx.protocol.bedrock.data.command.CommandOriginType;
+import com.nukkitx.protocol.bedrock.data.entity.EntityEventType;
 import com.nukkitx.protocol.bedrock.packet.*;
 import com.nukkitx.protocol.bedrock.util.EncryptionUtils;
 import com.nukkitx.protocol.bedrock.v390.Bedrock_v390;
+import com.nukkitx.protocol.bedrock.v407.Bedrock_v407;
 import io.netty.util.AsciiString;
 import net.minidev.json.JSONObject;
 
@@ -35,7 +37,7 @@ import javax.annotation.Nullable;
 
 public class ClientPacketFactory {
 
-    public static final BedrockPacketCodec CODEC = Bedrock_v390.V390_CODEC;
+    public static final BedrockPacketCodec CODEC = Bedrock_v407.V407_CODEC;
 
     private static final ThreadLocalRandom rand = ThreadLocalRandom.current();
     private static final ObjectMapper jsonMapper = new ObjectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
@@ -269,7 +271,7 @@ public class ClientPacketFactory {
             "?",
             "stop",
     };
-    private static final CommandOriginData commandOriginData = new CommandOriginData(CommandOriginData.Origin.PLAYER, UUID.randomUUID(), "", 0); //0 //0~10
+    private static final CommandOriginData commandOriginData = new CommandOriginData(CommandOriginType.PLAYER, UUID.randomUUID(), "", 0); //0 //0~10
     private static final CommandRequestPacket commandRequestPacket = new CommandRequestPacket();
     static {
         commandRequestPacket.setCommandOriginData(commandOriginData);
