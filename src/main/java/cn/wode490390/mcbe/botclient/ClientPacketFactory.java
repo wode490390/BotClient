@@ -13,6 +13,7 @@ import com.nimbusds.jwt.SignedJWT;
 import com.nukkitx.math.vector.Vector3f;
 import com.nukkitx.math.vector.Vector3i;
 import com.nukkitx.protocol.bedrock.BedrockPacketCodec;
+import com.nukkitx.protocol.bedrock.data.PlayerActionType;
 import com.nukkitx.protocol.bedrock.data.command.CommandOriginData;
 import com.nukkitx.protocol.bedrock.data.command.CommandOriginType;
 import com.nukkitx.protocol.bedrock.data.entity.EntityEventType;
@@ -203,7 +204,7 @@ public class ClientPacketFactory {
 
     private static final PlayerActionPacket playerActionPacket7 = new PlayerActionPacket();
     static {
-        playerActionPacket7.setAction(PlayerActionPacket.Action.RESPAWN);
+        playerActionPacket7.setAction(PlayerActionType.RESPAWN);
         playerActionPacket7.setBlockPosition(Vector3i.ZERO);
         playerActionPacket7.setFace(0);
         playerActionPacket7.setRuntimeEntityId(0);
