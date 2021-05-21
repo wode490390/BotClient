@@ -304,7 +304,7 @@ public class ClientPacketFactory {
         return playerActionPacket14;
     }
 
-    private static final PlayerActionPacket.Action[] playerActionPacketActions = {
+    private static final PlayerActionType[] playerActionPacketActions = {
             PlayerActionType.START_SPRINT, //9
             PlayerActionType.STOP_SPRINT, //10
             PlayerActionType.START_SNEAK, //11
