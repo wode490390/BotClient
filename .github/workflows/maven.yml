@@ -31,5 +31,5 @@ jobs:
     - name: Archive artifacts
       uses: actions/upload-artifact@v1
       with:
-        name: artifacts
+        name: BotClient
         path: artifact
