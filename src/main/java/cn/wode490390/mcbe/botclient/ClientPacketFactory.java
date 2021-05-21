@@ -283,7 +283,7 @@ public class ClientPacketFactory {
 
     private static final PlayerActionPacket playerActionPacket1Or2 = new PlayerActionPacket();
     static {
-        playerActionPacket1Or2.setAction(PlayerActionPacket.Action.STOP_BREAK); //2 //==ABORT_BREAK 1
+        playerActionPacket1Or2.setAction(PlayerActionType.STOP_BREAK); //2 //==ABORT_BREAK 1
         playerActionPacket1Or2.setBlockPosition(Vector3i.ZERO);
         playerActionPacket1Or2.setFace(0);
         playerActionPacket1Or2.setRuntimeEntityId(0);
@@ -295,7 +295,7 @@ public class ClientPacketFactory {
 
     private static final PlayerActionPacket playerActionPacket14 = new PlayerActionPacket();
     static {
-        playerActionPacket14.setAction(PlayerActionPacket.Action.DIMENSION_CHANGE_SUCCESS); //!spawned
+        playerActionPacket14.setAction(PlayerActionType.DIMENSION_CHANGE_SUCCESS); //!spawned
         playerActionPacket14.setBlockPosition(Vector3i.ZERO);
         playerActionPacket14.setFace(0);
         playerActionPacket14.setRuntimeEntityId(0);
@@ -305,14 +305,14 @@ public class ClientPacketFactory {
     }
 
     private static final PlayerActionPacket.Action[] playerActionPacketActions = {
-            PlayerActionPacket.Action.START_SPRINT, //9
-            PlayerActionPacket.Action.STOP_SPRINT, //10
-            PlayerActionPacket.Action.START_SNEAK, //11
-            PlayerActionPacket.Action.STOP_SNEAK, //12
-            PlayerActionPacket.Action.START_GLIDE, //15
-            PlayerActionPacket.Action.STOP_GLIDE, //16
-            PlayerActionPacket.Action.START_SWIMMING, //21
-            PlayerActionPacket.Action.STOP_SWIMMING //22
+            PlayerActionType.START_SPRINT, //9
+            PlayerActionType.STOP_SPRINT, //10
+            PlayerActionType.START_SNEAK, //11
+            PlayerActionType.STOP_SNEAK, //12
+            PlayerActionType.START_GLIDE, //15
+            PlayerActionType.STOP_GLIDE, //16
+            PlayerActionType.START_SWIMMING, //21
+            PlayerActionType.STOP_SWIMMING //22
     };
     private static final PlayerActionPacket playerActionPacket = new PlayerActionPacket();
     static {
