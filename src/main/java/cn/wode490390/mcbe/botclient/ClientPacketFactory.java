@@ -36,7 +36,7 @@ import javax.annotation.Nullable;
 
 public class ClientPacketFactory {
 
-    public static final BedrockPacketCodec CODEC = Bedrock_v408.V408_CODEC;
+    public static final BedrockPacketCodec CODEC = Bedrock_v431.V431_CODEC;
 
     private static final ThreadLocalRandom rand = ThreadLocalRandom.current();
     private static final ObjectMapper jsonMapper = new ObjectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
@@ -138,7 +138,7 @@ public class ClientPacketFactory {
     public static LoginPacket randomLoginPacket() {
         String playerName = "wode" + (rand.nextInt() & 0x7fffffff);
         String svrAddr = "127.0.0.1:19132";
-        String mcVer = "1.16.20" /*+ rand.nextInt(1)*/;
+        String mcVer = "1.16.221" /*+ rand.nextInt(1)*/;
         String lang = langs.get(rand.nextInt(langs.size() - 1));
         String geometryName = "geometry.humanoid.custom";
         String skinGeometry = "_Custom";
