@@ -13,12 +13,13 @@ import com.nimbusds.jwt.SignedJWT;
 import com.nukkitx.math.vector.Vector3f;
 import com.nukkitx.math.vector.Vector3i;
 import com.nukkitx.protocol.bedrock.BedrockPacketCodec;
+import com.nukkitx.protocol.bedrock.data.PlayerActionType;
 import com.nukkitx.protocol.bedrock.data.command.CommandOriginData;
 import com.nukkitx.protocol.bedrock.data.command.CommandOriginType;
 import com.nukkitx.protocol.bedrock.data.entity.EntityEventType;
 import com.nukkitx.protocol.bedrock.packet.*;
 import com.nukkitx.protocol.bedrock.util.EncryptionUtils;
-import com.nukkitx.protocol.bedrock.v408.Bedrock_v408;
+import com.nukkitx.protocol.bedrock.v431.Bedrock_v431;
 import io.netty.util.AsciiString;
 import net.minidev.json.JSONObject;
 
@@ -36,7 +37,7 @@ import javax.annotation.Nullable;
 
 public class ClientPacketFactory {
 
-    public static final BedrockPacketCodec CODEC = Bedrock_v408.V408_CODEC;
+    public static final BedrockPacketCodec CODEC = Bedrock_v431.V431_CODEC;
 
     private static final ThreadLocalRandom rand = ThreadLocalRandom.current();
     private static final ObjectMapper jsonMapper = new ObjectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
@@ -138,7 +139,7 @@ public class ClientPacketFactory {
     public static LoginPacket randomLoginPacket() {
         String playerName = "wode" + (rand.nextInt() & 0x7fffffff);
         String svrAddr = "127.0.0.1:19132";
-        String mcVer = "1.16.20" /*+ rand.nextInt(1)*/;
+        String mcVer = "1.16.221" /*+ rand.nextInt(1)*/;
         String lang = langs.get(rand.nextInt(langs.size() - 1));
         String geometryName = "geometry.humanoid.custom";
         String skinGeometry = "_Custom";
@@ -203,7 +204,7 @@ public class ClientPacketFactory {
 
     private static final PlayerActionPacket playerActionPacket7 = new PlayerActionPacket();
     static {
-        playerActionPacket7.setAction(PlayerActionPacket.Action.RESPAWN);
+        playerActionPacket7.setAction(PlayerActionType.RESPAWN);
         playerActionPacket7.setBlockPosition(Vector3i.ZERO);
         playerActionPacket7.setFace(0);
         playerActionPacket7.setRuntimeEntityId(0);
@@ -282,7 +283,7 @@ public class ClientPacketFactory {
 
     private static final PlayerActionPacket playerActionPacket1Or2 = new PlayerActionPacket();
     static {
-        playerActionPacket1Or2.setAction(PlayerActionPacket.Action.STOP_BREAK); //2 //==ABORT_BREAK 1
+        playerActionPacket1Or2.setAction(PlayerActionType.STOP_BREAK); //2 //==ABORT_BREAK 1
         playerActionPacket1Or2.setBlockPosition(Vector3i.ZERO);
         playerActionPacket1Or2.setFace(0);
         playerActionPacket1Or2.setRuntimeEntityId(0);
@@ -294,7 +295,7 @@ public class ClientPacketFactory {
 
     private static final PlayerActionPacket playerActionPacket14 = new PlayerActionPacket();
     static {
-        playerActionPacket14.setAction(PlayerActionPacket.Action.DIMENSION_CHANGE_SUCCESS); //!spawned
+        playerActionPacket14.setAction(PlayerActionType.DIMENSION_CHANGE_SUCCESS); //!spawned
         playerActionPacket14.setBlockPosition(Vector3i.ZERO);
         playerActionPacket14.setFace(0);
         playerActionPacket14.setRuntimeEntityId(0);
@@ -303,15 +304,15 @@ public class ClientPacketFactory {
         return playerActionPacket14;
     }
 
-    private static final PlayerActionPacket.Action[] playerActionPacketActions = {
-            PlayerActionPacket.Action.START_SPRINT, //9
-            PlayerActionPacket.Action.STOP_SPRINT, //10
-            PlayerActionPacket.Action.START_SNEAK, //11
-            PlayerActionPacket.Action.STOP_SNEAK, //12
-            PlayerActionPacket.Action.START_GLIDE, //15
-            PlayerActionPacket.Action.STOP_GLIDE, //16
-            PlayerActionPacket.Action.START_SWIMMING, //21
-            PlayerActionPacket.Action.STOP_SWIMMING //22
+    private static final PlayerActionType[] playerActionPacketActions = {
+            PlayerActionType.START_SPRINT, //9
+            PlayerActionType.STOP_SPRINT, //10
+            PlayerActionType.START_SNEAK, //11
+            PlayerActionType.STOP_SNEAK, //12
+            PlayerActionType.START_GLIDE, //15
+            PlayerActionType.STOP_GLIDE, //16
+            PlayerActionType.START_SWIMMING, //21
+            PlayerActionType.STOP_SWIMMING //22
     };
     private static final PlayerActionPacket playerActionPacket = new PlayerActionPacket();
     static {
